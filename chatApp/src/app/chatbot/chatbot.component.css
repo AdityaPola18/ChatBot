@@ -1,0 +1,42 @@
+.chatCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 465px;
+    width: 400px;
+    background-color: antiquewhite;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 50px;    
+}
+.message {
+    background-color: rgb(255, 255, 255);
+    border-radius: 20px;
+    margin-bottom: 10px;
+    border-bottom-left-radius:0 ;
+    width: fit-content;
+    padding: 10px;
+}
+.inputCont{
+    justify-self: flex-end;
+    display: flex;
+    align-items: center;
+}
+.input{
+    width: 75%;
+    height: 35px;
+}
+.button {
+    height: 35px;
+}
+.searchResults {
+    background-color: aliceblue;
+    padding: 0.1px;
+    width: 75%;
+    height: auto;
+    max-height: 220px;
+    margin: 0px;
+}

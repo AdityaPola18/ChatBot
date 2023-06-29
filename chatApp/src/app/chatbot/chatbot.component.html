@@ -1,0 +1,23 @@
+<div class="d-flex flex-column align-items-center">
+    <div class="chatCont">
+        <div>
+            <div class="message">
+                <p style="font-size: 14px;">Hello, this symptom analyzer will help suggest what disease you may be experiencing</p>
+            </div>
+            <div class="message">
+                <p style="font-size: 14px;">Please enter what symptom you may be feeling</p>
+            </div>
+        </div>
+        <div>
+            <div style="overflow-y: auto;">
+                <div class="searchResults" (click)="onSelect(each)" *ngFor="let each of searchResults">
+                    <p class="eachSearchItem">{{each}}</p>
+                </div>
+            </div>
+            <div class="inputCont">
+                <input type="search" [(ngModel)] = "inputValue" (keyup)="onSearch()" class="input"/>
+                <button class="btn btn-primary button" (click)="onSubmit()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

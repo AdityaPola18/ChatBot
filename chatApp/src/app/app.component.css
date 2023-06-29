@@ -1,0 +1,9 @@
+.bg {
+    background-color: rgb(34,38,84);
+    background-size: cover;
+    height: 100vh;
+}
+.logo {
+    height: 100px;
+    width: 250px;
+}
