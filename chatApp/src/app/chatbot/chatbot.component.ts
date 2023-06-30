@@ -14,6 +14,9 @@ export class ChatbotComponent {
     this.symptoms = ["fever", "cough", "cold", "sore throat", "headache", "body pains",];
     this.searchResults= []
   }
+  ngOnInit() {
+    this.inputValue="";
+  }
   onSearch() {
     if(this.inputValue===""){
       this.searchResults=[]

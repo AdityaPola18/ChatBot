@@ -3,8 +3,17 @@
         <div class="message">
             <p style="font-size: 14px;">Hello, this symptom analyzer will help suggest what disease you may be experiencing</p>
         </div>
-        <div class="message">
-            <p style="font-size: 14px;">Please enter what symptom you may be feeling</p>
-        </div>        
+        <div *ngFor="let currentQuestion of currentQuestions">
+            <div class="message">
+                <p style="font-size: 14px;">{{currentQuestion.question}}</p>
+                <div class="optionsCont">
+                    <div *ngFor="let each of currentQuestion.options" class="optionsCont">
+                        <button (click)="onClick(each.text)" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
+                    </div>
+                </div>
+            </div>  
+            <p class="message message2" [class.d-none]="!currentQuestion.options[0].isDisable" [class.d-block]="currentQuestion.options[0].isDisable">{{currentQuestion.answer}}</p>
+        </div>      
+        
     </div>
 </div>

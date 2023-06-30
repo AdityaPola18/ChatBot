@@ -1,7 +1,7 @@
 .chatCont{
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 465px;
     width: 400px;
     background-color: antiquewhite;
@@ -11,6 +11,7 @@
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 50px;    
+    overflow-y: auto;
 }
 .message {
     background-color: rgb(255, 255, 255);
@@ -19,6 +20,15 @@
     border-bottom-left-radius:0 ;
     width: fit-content;
     padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.message2{
+    align-self: flex-end;
+    margin-left: auto;
+    border-radius: 20px;
+    border-bottom-right-radius:0 ;
+    background-color: rgb(164, 210, 250);
 }
 .inputCont{
     justify-self: flex-end;
@@ -39,4 +49,8 @@
     height: auto;
     max-height: 220px;
     margin: 0px;
+}
+.optionsCont{
+    display: flex;
+    flex-direction: row;
 }
