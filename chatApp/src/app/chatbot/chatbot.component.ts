@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+import { fromEvent } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -11,11 +13,14 @@ export class ChatbotComponent {
   inputValue: any
   searchResults: any
   constructor(private route: Router) {
-    this.symptoms = ["fever", "cough", "cold", "sore throat", "headache", "body pains",];
+    this.symptoms = ["abdominal pain","abnormal menstruation","acidity","acute liver failure","altered sensorium","anxiety","back pain","belly pain","blackheads","bladder discomfort","blister","blood in sputum","bloody stool","blurred and distorted vision","breathlessness","brittle nails","bruising","burning micturition"];
     this.searchResults= []
   }
   ngOnInit() {
+
+
     this.inputValue="";
+    localStorage.clear();
   }
   onSearch() {
     if(this.inputValue===""){
@@ -37,7 +42,9 @@ export class ChatbotComponent {
   }
   onSubmit() {
     if(this.inputValue.length !== 0){
-      this.route.navigate(["/chatPage"]);
+      localStorage.setItem("symptom",this.inputValue);
+      console.log(this.inputValue)
+      this.route.navigate(['chatPage']);
     }
   }
 }

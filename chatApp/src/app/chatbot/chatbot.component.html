@@ -9,7 +9,7 @@
             </div>
         </div>
         <div>
-            <div style="overflow-y: auto;">
+            <div class="overflow">
                 <div class="searchResults" (click)="onSelect(each)" *ngFor="let each of searchResults">
                     <p class="eachSearchItem">{{each}}</p>
                 </div>

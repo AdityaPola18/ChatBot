@@ -28,6 +28,10 @@ export class QuestionService {
       return null
     }
     else{
+      this.questionsArray[currentId].answer="";
+      for(let each of this.questionsArray[currentId].options){
+        each.isDisable=false      
+      }
       return this.questionsArray[currentId];
 
     }

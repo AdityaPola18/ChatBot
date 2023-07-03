@@ -31,12 +31,17 @@
 }
 .button {
     height: 35px;
+    margin-left: 5px;
 }
 .searchResults {
     background-color: aliceblue;
     padding: 0.1px;
-    width: 75%;
+    width: 100%;
     height: auto;
     max-height: 220px;
     margin: 0px;
+}
+.overflow{
+    overflow-y: auto;
+    max-height: 220px;
 }

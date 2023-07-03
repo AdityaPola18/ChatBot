@@ -20,8 +20,15 @@
     border-bottom-left-radius:0 ;
     width: fit-content;
     padding: 10px;
+    padding-bottom: 5px;
     display: flex;
     flex-direction: column;
+}
+.optionBtn{
+    border-width: 0;
+    background-color: rgb(197, 225, 249);
+    padding: 5px;
+    margin: 5px;
 }
 .message2{
     align-self: flex-end;
@@ -53,4 +60,9 @@
 .optionsCont{
     display: flex;
     flex-direction: row;
+}
+.backBtn{
+    justify-self: flex-end;
+    width: 80px;
+    margin-top: auto;
 }
