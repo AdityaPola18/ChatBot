@@ -36,6 +36,7 @@
     border-radius: 20px;
     border-bottom-right-radius:0 ;
     background-color: rgb(164, 210, 250);
+    width: fit-content;
 }
 .inputCont{
     justify-self: flex-end;
@@ -61,8 +62,35 @@
     display: flex;
     flex-direction: row;
 }
+.multiAnsCont{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    align-self: flex-end;
+    width: fit-content;
+}
+.multiSelectOptionsCont{
+    display: flex;
+    flex-direction: column;
+}
+.submitBtn{
+    border-width: 0;
+    width: 70px;
+    padding: 5px;
+    margin: 5px;
+}
 .backBtn{
     justify-self: flex-end;
     width: 80px;
     margin-top: auto;
+}
+.isSelected{
+    background-color: rgb(59, 160, 248);
+}
+.multiOptionsCont{
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: rgb(188, 222, 252);
 }

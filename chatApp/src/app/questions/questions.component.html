@@ -3,19 +3,46 @@
         <div class="message">
             <p style="font-size: 14px;">Hello, this symptom analyzer will help suggest what disease you may be experiencing</p>
         </div>
+        <div class="message">
+            <p style="font-size: 14px;">Please enter what symptom you may be feeling</p>
+        </div>
         <div class="message message2">
             <p style="font-size: 14px;">{{symptomName}}</p>
         </div>
         <div *ngFor="let currentQuestion of currentQuestions">
-            <div class="message">
-                <p style="font-size: 14px;">{{currentQuestion.question}}</p>
-                <div class="optionsCont">
-                    <div *ngFor="let each of currentQuestion.options" class="optionsCont">
-                        <button class="optionBtn" (click)="onClick(each.text)" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
+            <div *ngIf="currentQuestion.isSingleselect; else multiSelect">
+                <div class="message">
+                    <p style="font-size: 14px;">{{currentQuestion.question}}</p>
+                    <div class="optionsCont">
+                        <div *ngFor="let each of currentQuestion.options" class="optionsCont">
+                            <button class="optionBtn" (click)="onClick(each.text)" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
+                        </div>
                     </div>
                 </div>
+                <p class="message message2" [class.d-none]="!currentQuestion.options[0].isDisable">{{currentQuestion.answer}}</p>
             </div>
-            <p class="message message2" [class.d-none]="!currentQuestion.options[0].isDisable" [class.d-block]="currentQuestion.options[0].isDisable">{{currentQuestion.answer}}</p>
+            <ng-template #multiSelect>
+                <div>
+                    <div class="message">
+                        <p style="font-size: 14px;">{{currentQuestion.question}}</p>
+                        <div class="mulitSelectOptionsCont">
+                            <div class="optionsCont">
+                                <div *ngFor="let each of currentQuestion.options" class="optionsCont">
+                                    <button class="optionBtn" (click)="onSelect(each)" [class.isSelected]="each.isSelected" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary submitBtn" [disabled]="currentQuestion.options[0].isDisable" (click)="onSubmitAns()">Submit</button>
+                        </div>
+                    </div>
+                    <div class="message2">
+                        <div class="multiAnsCont">
+                            <div *ngFor="let each of currentQuestion.answer" class="optionsCont">
+                                <p class="optionBtn" style="font-size: 12px; border-radius: 10px;">{{each}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
         </div>
         <button class="btn btn-primary backBtn" (click)="onBack()">Back</button>
     </div>

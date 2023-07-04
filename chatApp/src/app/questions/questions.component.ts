@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionService } from '../question.service';
 import { Router } from '@angular/router';
-import { fromEvent } from 'rxjs';
 
 @Component({
   selector: 'app-questions',
@@ -9,17 +8,15 @@ import { fromEvent } from 'rxjs';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit{
-
   constructor(public questionService: QuestionService, private router: Router){}
   currentQuestions:any = [];
   currentId: number = 0
   btnValue: any
   symptomName: any
   questionsArr!: any
+  currentSelectedAnswers: string[] =[]
+  multiAnswers : string[] = [];
   ngOnInit(){
-
-
-
     this.symptomName = localStorage.getItem("symptom");
     if(this.symptomName===null){
       this.router.navigate([""]);
@@ -32,12 +29,17 @@ export class QuestionsComponent implements OnInit{
     }
     else{
       this.currentQuestions = JSON.parse(this.questionsArr);
-      console.log("ques: ",this.currentQuestions)
       this.currentId=this.currentQuestions.length
+      const nextQuestion = this.questionService.getQuestion(this.currentId)
+      const prevQues = this.currentQuestions[this.currentId-1]
+      console.log("prev: ",prevQues);
+      if(nextQuestion!==null && prevQues.options[0].isDisable===true){
+        this.currentQuestions.push(nextQuestion);
+        this.currentId+=1
+      }
     } 
   }
   onClick(text: any){
-    console.log(this.currentId);
     this.btnValue = text;
     this.currentQuestions[this.currentId-1].answer = text;
     for(let each of this.currentQuestions[this.currentId-1].options){
@@ -48,12 +50,47 @@ export class QuestionsComponent implements OnInit{
     const res = this.questionService.getQuestion(this.currentId)
     if(res!==null){
       this.currentQuestions.push(res);
+      const stringifiedQues = JSON.stringify(this.currentQuestions);
+      localStorage.setItem("questionsArr",stringifiedQues);
     }
     this.currentId+=1
   }
   onBack(){
     this.currentQuestions = []
     localStorage.clear();
-    this.router.navigate([""]);
+    this.router.navigate(["/symptoms"]);
+  }
+  onSelect(each: any){
+    each.isSelected = !each.isSelected
+    const text = each.text
+    if(!this.currentSelectedAnswers.includes(text)){
+      this.currentSelectedAnswers.push(text);
+    }
+    else{
+      let i=0
+      for (i=0; i < this.currentSelectedAnswers.length; ++i) {
+        if (this.currentSelectedAnswers[i] === text) {
+          this.currentSelectedAnswers.splice(i, 1);
+        }
+      }
+    }
+  }
+  onSubmitAns(){
+    this.multiAnswers = this.currentSelectedAnswers
+    this.currentQuestions[this.currentId-1].answer = this.multiAnswers;
+
+    for(let each of this.currentQuestions[this.currentId-1].options){
+      each.isDisable = true;
+    }
+    const stringifiedQues = JSON.stringify(this.currentQuestions);
+    localStorage.setItem("questionsArr",stringifiedQues);
+    const res = this.questionService.getQuestion(this.currentId)
+    if(res!==null){
+      this.currentQuestions.push(res);
+      const stringifiedQues = JSON.stringify(this.currentQuestions);
+      localStorage.setItem("questionsArr",stringifiedQues);
+    }
+    this.currentId+=1
+    this.currentSelectedAnswers=[]
   }
 }

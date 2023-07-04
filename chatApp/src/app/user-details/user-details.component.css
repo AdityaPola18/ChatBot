@@ -1,0 +1,24 @@
+
+.image{
+    height: 100px;
+    width: 250px;
+}
+.card1{
+   
+    height: 450px;
+    width: auto;
+    margin-bottom: 10px;
+   
+}
+.card2{
+    background-color: antiquewhite;
+    border-width: 1px;
+    border-style: solid;
+    border-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 5px 3px 3px 3px lightblue;
+}
+.is-invalid{
+    border: 1px solid rgb(237, 45, 24);
+}
