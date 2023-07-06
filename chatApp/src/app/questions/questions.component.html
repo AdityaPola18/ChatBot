@@ -31,13 +31,13 @@
                                     <button class="optionBtn" (click)="onSelect(each)" [class.isSelected]="each.isSelected" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
                                 </div>
                             </div>
-                            <button class="btn btn-primary submitBtn" [disabled]="currentQuestion.options[0].isDisable" (click)="onSubmitAns()">Submit</button>
+                            <button class="btn btn-primary submitBtn" [disabled]="currentQuestion.options[0].isDisable || currentSelectedAnswers.length===0" (click)="onSubmitAns()">Submit</button>
                         </div>
                     </div>
                     <div class="message2">
                         <div class="multiAnsCont">
-                            <div *ngFor="let each of currentQuestion.answer" class="optionsCont">
-                                <p class="optionBtn" style="font-size: 12px; border-radius: 10px;">{{each}}</p>
+                            <div *ngFor="let each of currentQuestion.answer">
+                                <p class="multiOptionBtn" style="font-size: 12px; border-radius: 10px;">{{each}}</p>
                             </div>
                         </div>
                     </div>

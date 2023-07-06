@@ -30,6 +30,11 @@
     padding: 5px;
     margin: 5px;
 }
+.multiOptionBtn{
+    border-width: 0;
+    padding: 5px;
+    margin: 5px;
+}
 .message2{
     align-self: flex-end;
     margin-left: auto;
@@ -37,6 +42,7 @@
     border-bottom-right-radius:0 ;
     background-color: rgb(164, 210, 250);
     width: fit-content;
+    margin-bottom: 10px;
 }
 .inputCont{
     justify-self: flex-end;
@@ -86,6 +92,7 @@
 }
 .isSelected{
     background-color: rgb(59, 160, 248);
+    color: white;
 }
 .multiOptionsCont{
     padding: 20px;

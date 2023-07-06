@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
   styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit{
-  constructor(public questionService: QuestionService, private router: Router){}
   currentQuestions:any = [];
   currentId: number = 0
   btnValue: any
@@ -16,10 +15,16 @@ export class QuestionsComponent implements OnInit{
   questionsArr!: any
   currentSelectedAnswers: string[] =[]
   multiAnswers : string[] = [];
+  
+  constructor(public questionService: QuestionService, private router: Router){}
+
   ngOnInit(){
+
+    const ques = this.questionService.postSymptom();
+    console.log(ques);
     this.symptomName = localStorage.getItem("symptom");
     if(this.symptomName===null){
-      this.router.navigate([""]);
+      this.router.navigate(["/symptoms"]);
     }
     this.questionsArr = localStorage.getItem("questionsArr");
     if(this.questionsArr===null){
@@ -32,7 +37,7 @@ export class QuestionsComponent implements OnInit{
       this.currentId=this.currentQuestions.length
       const nextQuestion = this.questionService.getQuestion(this.currentId)
       const prevQues = this.currentQuestions[this.currentId-1]
-      console.log("prev: ",prevQues);
+      // console.log("prev: ",prevQues);
       if(nextQuestion!==null && prevQues.options[0].isDisable===true){
         this.currentQuestions.push(nextQuestion);
         this.currentId+=1
@@ -42,6 +47,9 @@ export class QuestionsComponent implements OnInit{
   onClick(text: any){
     this.btnValue = text;
     this.currentQuestions[this.currentId-1].answer = text;
+    // const ques = this.currentQuestions[this.currentId-1]
+    // const postObj = {question: ques,answer:text};
+    // this.questionService.postQuestion(postObj)
     for(let each of this.currentQuestions[this.currentId-1].options){
       each.isDisable = true;
     }
@@ -57,6 +65,8 @@ export class QuestionsComponent implements OnInit{
   }
   onBack(){
     this.currentQuestions = []
+    this.currentSelectedAnswers = []
+    this.multiAnswers = []
     localStorage.clear();
     this.router.navigate(["/symptoms"]);
   }

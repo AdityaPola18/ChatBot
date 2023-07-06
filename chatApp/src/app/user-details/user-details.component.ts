@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators,FormGroup } from '@angular/forms';
+import { QuestionService } from '../question.service';
 
 
 @Component({
@@ -10,13 +11,13 @@ import { FormBuilder, Validators,FormGroup } from '@angular/forms';
 export class UserDetailsComponent {
 
   userdetails:any=FormGroup
-  constructor(private fb:FormBuilder){
+  constructor(private fb:FormBuilder, public questionService: QuestionService){
 
   }
 
   ngOnInit(){
     this.userdetails=this.fb.group({
-      name:[null,[Validators.required,Validators.minLength(4)]],
+      name:[null,[Validators.required,Validators.minLength(2)]],
       age:['',Validators.required],
       gender:['',Validators.required],
       smoking:['',Validators.required],
@@ -70,6 +71,7 @@ export class UserDetailsComponent {
   }
 
   detalis(){
+    this.questionService.postDetails(this.userdetails.value);
     console.log(this.userdetails.value)
   }
 }

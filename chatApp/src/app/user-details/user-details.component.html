@@ -5,7 +5,7 @@
                     Name:<input [class.is-invalid]="(userdetails.get('name')?.invalid && userdetails.get('name')?.touched)" class="m-3 ml-0" placeholder="Enter the name" type="text" formControlName="name"/>
                     <!-- <small *ngIf="!userdetails.get('name')?.invalid && userdetails.get('name')?.touched ">error</small> -->
                 
-                    age:<input [class.is-invalid]="userdetails.get('age')?.invalid && userdetails.get('age')?.touched"  class="m-3" placeholder="Enter the age" type="number" formControlName="age"/>
+                    age:<input [class.is-invalid]="userdetails.get('age')?.invalid && userdetails.get('age')?.touched"  class="m-3" placeholder="Enter the age" type="number" min="0" max="100" formControlName="age"/>
                 
                     Gender:
                         <div>
