@@ -7,3 +7,10 @@
     height: 100px;
     width: 250px;
 }
+@media screen and (max-width: 480px) {
+    .logo{
+        height: 80px;
+        width: 180px;
+        margin-bottom: 20px;
+    }
+}
