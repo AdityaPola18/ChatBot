@@ -10,40 +10,22 @@
             <p style="font-size: 14px;">{{symptomName}}</p>
         </div>
         <div *ngFor="let currentQuestion of currentQuestions">
-            <div *ngIf="currentQuestion.isSingleselect; else multiSelect">
+            <div>
                 <div class="message">
-                    <p style="font-size: 14px;">{{currentQuestion.question}}</p>
+                    <p style="font-size: 14px;">{{currentQuestion.question}}?</p>
                     <div class="optionsCont">
-                        <div *ngFor="let each of currentQuestion.options" class="optionsCont">
+                        <div *ngFor="let each of currentQuestion.optionsArr" class="optionsCont">
                             <button class="optionBtn" (click)="onClick(each.text)" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
                         </div>
                     </div>
                 </div>
-                <p class="message message2" [class.d-none]="!currentQuestion.options[0].isDisable">{{currentQuestion.answer}}</p>
+                <p class="message message2" [class.d-none]="!currentQuestion.optionsArr[0].isDisable">{{currentQuestion.answer}}</p>
             </div>
-            <ng-template #multiSelect>
-                <div>
-                    <div class="message">
-                        <p style="font-size: 14px;">{{currentQuestion.question}}</p>
-                        <div class="mulitSelectOptionsCont">
-                            <div class="optionsCont">
-                                <div *ngFor="let each of currentQuestion.options" class="optionsCont">
-                                    <button class="optionBtn" (click)="onSelect(each)" [class.isSelected]="each.isSelected" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary submitBtn" [disabled]="currentQuestion.options[0].isDisable || currentSelectedAnswers.length===0" (click)="onSubmitAns()">Submit</button>
-                        </div>
-                    </div>
-                    <div class="message2">
-                        <div class="multiAnsCont">
-                            <div *ngFor="let each of currentQuestion.answer">
-                                <p class="multiOptionBtn" style="font-size: 12px; border-radius: 10px;">{{each}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </ng-template>
+            
         </div>
-        <button class="btn btn-primary backBtn" (click)="onBack()">Back</button>
+        <div class="btnCont">
+            <button class="btn btn-primary backBtn" (click)="onBack()">Back</button>
+            <button class="btn reportBtn" [class.d-none]="!isLastQuestion" (click)="getReport()"><a style="text-decoration: none; color:white;" href="{{url}}" target="_blank">Get Report</a></button>
+        </div>
     </div>
 </div>

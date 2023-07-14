@@ -21,7 +21,7 @@ export class UserDetailsComponent {
       age:['',Validators.required],
       gender:['',Validators.required],
       smoking:['',Validators.required],
-      drinking:['',Validators.required]
+      drinking:['',Validators.required],
     })
   }
 
@@ -71,7 +71,8 @@ export class UserDetailsComponent {
   }
 
   detalis(){
-    this.questionService.postDetails(this.userdetails.value);
-    console.log(this.userdetails.value)
+    this.questionService.setDetails(this.userdetails.value);
+    // this.questionService.postDetails();
+    // console.log(this.userdetails.value)
   }
 }
