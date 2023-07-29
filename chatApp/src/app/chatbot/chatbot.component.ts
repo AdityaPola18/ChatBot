@@ -41,13 +41,11 @@ export class ChatbotComponent {
     this.searchResults=[];
   }
   onSubmit() {
+    // posting the userdetails along with symptom
     if(this.inputValue.length !== 0 && this.symptoms.includes(this.inputValue)){
-      localStorage.setItem("symptom",this.inputValue);
-      // console.log(this.inputValue)
       this.questionService.setSymptom(this.inputValue);
       this.questionService.postDetails();
       this.route.navigate(['/chatPage']);
     }
-    // this.questionService.postSymptom();
   }
 }

@@ -63,16 +63,20 @@ export class QuestionService {
 
   //   }
   // }
+
+  //saving the symptom
   setSymptom(symptom:any){
     this.symptomName=symptom
     this.userDetails = {...this.userDetails,symptom: this.symptomName};
     console.log(this.userDetails)
   }
+
+  //creating question as suitable to UI
   createQuestion(res:any){
 
-    // if(res.response.question==="Diagnosis Complete"){
-    //   return null
-    // }
+    if(res.response.status==="Diagnosis Complete"){
+      return null
+    }
     const optionsType = res.response.option
     console.log("type: ",optionsType)
     let options = []
@@ -86,9 +90,9 @@ export class QuestionService {
       options = this.optionsArr.q2
     }
     let ques = ""
-    const quesKey = "question"+String(this.quesArr.length+1)
-    console.log("ques key: ",quesKey)
-    for(let each of res.response[quesKey]){
+    // const quesKey = "question"+String(this.quesArr.length+1)
+    // console.log("ques key: ",quesKey)
+    for(let each of res.response.question){
       if(each === "_"){
         ques+=" "
       }
@@ -106,18 +110,19 @@ export class QuestionService {
     // }
     
     // const onlyQues = {[res.response[2]]: ques, answer: ""}
-    const onlyQues:any = {}
-    onlyQues[quesKey] = ques
-    onlyQues.answer = ""
-    onlyQues.data_id = res.response.data_id
-    console.log("onlyQues: ",onlyQues)
-    this.quesArr.push(onlyQues)
+    // const onlyQues:any = {}
+    // onlyQues.answer = ""
+    // onlyQues.data_id = res.response.data_id
+    // console.log("onlyQues: ",onlyQues)
     const qObj = {question: ques, optionsArr: options, answer: "",data_id: res.response.data_id}
+    this.quesArr.push(qObj)
     // this.quesArr.push(qObj)
     // const qObj = {question: "example ques?", optionsArr: ["Yes","No"], answer: ""}
     return qObj
 
   }
+
+  // posting symptom to retreive 1st question
   async postSymptom(): Promise<any> {
     const symptomObj = {symptom: this.symptomName};
     try {
@@ -130,39 +135,21 @@ export class QuestionService {
       throw new Error('Error fetching data: ' + error.message);
     }
   }
+
+  // posting answers to questions previously retreived
   async postAnswer(answer:any,id:any): Promise<any> {
     try {
-      console.log("ans: ", answer);
-      console.log("test1: ",id)
       this.quesArr[id].answer = answer.answer
-      // const key = Object.keys(this.quesArr)[id]
-      const key = "question"+String(id+1)
-      const QandA = this.quesArr[id][key]+":"+answer.answer
-      console.log("test2: ",QandA)
-      // let key =""
-      // if(id==0){
-      //   key = "question"
-      // }
-      // else{
-      //   key = "question"+String(id+1)
-      //   console.log("posting key: ",key)
-      // }
-      console.log("posting key: ",key)
-      const questions:any = {}
-      // const questions:any = {data_id: this.quesArr[id].data_id, question: QandA, user_input:answer.answer}
-      questions[key] = QandA
-      questions.data_id = this.quesArr[id].data_id
-      console.log("posted ans: ",questions)
-      const res = await this.http.post("http://192.168.97.194:5000/api",questions).toPromise();
-      // const res = await this.http.get("http://192.168.97.194:5000/api").toPromise();
-      console.log("ser res: ",res);
+      const ansToPost = {data_id: this.quesArr[id].data_id, user_input: answer.answer}
+      const res = await this.http.post("http://192.168.97.194:5000/api",ansToPost).toPromise();
       const ques = (this.createQuestion(res))
-      console.log("next: ",ques)
       return (ques);
     } catch (error: any) {
       throw new Error('Error fetching data: ' + error.message);
     }
   }
+
+  // posting user details and symptom for database storage purpose
   async postDetails(){
     const userData = {...this.userDetails,symptom:this.symptomName}
     console.log("details",userData);
@@ -175,24 +162,7 @@ export class QuestionService {
     });
   }
   
-  // async getFirstQuestion(){
-  //   return this.http.get("http://192.168.97.194:5000/api").subscribe((res: any) => {
-  //     console.log(res);
-  //   }, (err: any) => {
-  //     console.log(err);
-  //   });
-  // }
-
-  // async postQuestion(obj: any){
-  //   try{
-  //     const response = await this.http.post("http://192.168.99.83:5000/",obj).toPromise()
-  //     const nextQues = this.createQuestion(response);
-  //     return nextQues
-  //   }
-  //   catch(error: any){
-  //     throw new Error("Error message: "+error.message)
-  //   }
-  // }
+  
   async fetchReport(): Promise<any> {
     const data = {data_id: this.quesArr[0].data_id};
     try {
@@ -204,6 +174,7 @@ export class QuestionService {
     }
   }
 
+  //saving user details in service
   setDetails(details:any){
     this.userDetails = details;
     console.log("Details: ",details);

@@ -27,35 +27,7 @@ export class UserDetailsComponent {
 
  
 
-  // username:any=this.userdetails.get('name')
-  // userage:any=this.userdetails.get('age')
-  // usergender:any=this.userdetails.get('gender')
-  // usersmoking:any=this.userdetails.get('smoking')
-  // userdrinking:any=this.userdetails.get('drinking')
 
-
-
-
-  // userdetails={
-  //   name: "",
-  //   age:"",
-  //   gender:"",
-  //   smoking:"",
-  //   drinking:""
-
-  // }
-
-//    userage:any
-//    username:any
-
-//   ageEl(){
-//     // console.log(this.userage)
-//     this.userdetails.age=this.userage;
-//   }
-  
-//   nameEl(){
-//     this.userdetails.name=this.username
-//   }
 
   genderChange(gen:any){
     // this.userdetails.gender=value 
