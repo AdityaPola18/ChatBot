@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { QuestionsComponent } from './questions/questions.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ReportComponent } from './report/report.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
     ChatbotComponent,
     QuestionsComponent,
     UserDetailsComponent,
+    ReportComponent,
     
   ],
   imports: [

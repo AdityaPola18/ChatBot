@@ -1,31 +1,34 @@
-<div class="d-flex flex-column align-items-center">
-    <div class="chatCont">
-        <div class="message">
-            <p style="font-size: 14px;">Hello, this symptom analyzer will help suggest what disease you may be experiencing</p>
-        </div>
-        <div class="message">
-            <p style="font-size: 14px;">Please enter what symptom you may be feeling</p>
-        </div>
-        <div class="message message2">
-            <p style="font-size: 14px;">{{symptomName}}</p>
-        </div>
-        <div *ngFor="let currentQuestion of currentQuestions">
-            <div>
-                <div class="message">
-                    <p style="font-size: 14px;">{{currentQuestion.question}}?</p>
-                    <div class="optionsCont">
-                        <div *ngFor="let each of currentQuestion.optionsArr" class="optionsCont">
-                            <button class="optionBtn" (click)="onClick(each.text)" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
+<div class="container-fluid bg">
+    <img class="logo" src="https://flip.health/assets/images/logo-light.png" alt="Flip Health"/>
+    <div class="d-flex flex-column align-items-center">
+        <div class="chatCont">
+            <div class="message">
+                <p style="font-size: 14px;">Hello, this symptom analyzer will help suggest what disease you may be experiencing</p>
+            </div>
+            <div class="message">
+                <p style="font-size: 14px;">Please enter what symptom you may be feeling</p>
+            </div>
+            <div class="message message2">
+                <p style="font-size: 14px;">{{symptomName}}</p>
+            </div>
+            <div *ngFor="let currentQuestion of currentQuestions">
+                <div>
+                    <div class="message">
+                        <p style="font-size: 14px;">{{currentQuestion.question}}?</p>
+                        <div class="optionsCont">
+                            <div *ngFor="let each of currentQuestion.optionsArr" class="optionsCont">
+                                <button class="optionBtn" (click)="onClick(each.text)" [disabled]="each.isDisable" style="font-size: 12px; border-radius: 10px;">{{each.text}}</button>
+                            </div>
                         </div>
                     </div>
+                    <p class="message message2" [class.d-none]="!currentQuestion.optionsArr[0].isDisable">{{currentQuestion.answer}}</p>
                 </div>
-                <p class="message message2" [class.d-none]="!currentQuestion.optionsArr[0].isDisable">{{currentQuestion.answer}}</p>
+                
             </div>
-            
-        </div>
-        <div class="btnCont">
-            <button class="btn btn-primary backBtn" (click)="onBack()">Back</button>
-            <button class="btn reportBtn" [class.d-none]="!isLastQuestion" (click)="getReport()"><a style="text-decoration: none; color:white;" href="{{url}}" target="_blank">Get Report</a></button>
+            <div class="btnCont">
+                <button class="btn btn-primary backBtn" (click)="onBack()">Back</button>
+                <button class="btn reportBtn" [class.d-none]="isLastQuestion" (click)="getReport()">Get Report</button>
+            </div>
         </div>
     </div>
 </div>

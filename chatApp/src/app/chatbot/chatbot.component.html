@@ -1,25 +1,28 @@
-<div class="d-flex flex-column align-items-center">
-    <div class="chatCont" swScrollPosition='lorum-ipsum'>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" routerLink="" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" style="margin-bottom: 10px;" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-            </svg>
-            <div class="message">
-                <p style="font-size: 14px;">Hello, this symptom analyzer will help suggest what disease you may be experiencing</p>
-            </div>
-            <div class="message">
-                <p style="font-size: 14px;">Please enter what symptom you may be feeling</p>
-            </div>
-        </div>
-        <div>
-            <div class="overflow">
-                <div class="searchResults" (click)="onSelect(each)" *ngFor="let each of searchResults">
-                    <p class="eachSearchItem">{{each}}</p>
+<div class="container-fluid bg">
+    <img class="logo" src="https://flip.health/assets/images/logo-light.png" alt="Flip Health"/>
+    <div class="d-flex flex-column align-items-center">
+        <div class="chatCont" swScrollPosition='lorum-ipsum'>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" routerLink="" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" style="margin-bottom: 10px;" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+                </svg>
+                <div class="message">
+                    <p style="font-size: 14px;">Hello, this symptom analyzer will help suggest what disease you may be experiencing</p>
+                </div>
+                <div class="message">
+                    <p style="font-size: 14px;">Please enter what symptom you may be feeling</p>
                 </div>
             </div>
-            <div class="inputCont">
-                <input type="search" [(ngModel)] = "inputValue" name="search" (keyup)="onSearch()" class="input"/>
-                <button class="btn btn-primary button" (click)="onSubmit()">Submit</button>
+            <div>
+                <div class="overflow">
+                    <div class="searchResults" (click)="onSelect(each)" *ngFor="let each of searchResults">
+                        <p class="eachSearchItem">{{each}}</p>
+                    </div>
+                </div>
+                <div class="inputCont">
+                    <input type="search" [(ngModel)] = "inputValue" name="search" (keyup)="onSearch()" class="input"/>
+                    <button class="btn btn-primary button" (click)="onSubmit()">Submit</button>
+                </div>
             </div>
         </div>
     </div>

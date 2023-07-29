@@ -15,12 +15,11 @@ export class QuestionsComponent implements OnInit{
   btnValue: any
   symptomName: any
   questionsArr!: any
-  url: any
   // currentSelectedAnswers: string[] =[]
   // multiAnswers : string[] = [];
   isLastQuestion: any
   
-  constructor(public questionService: QuestionService, private router: Router, private http: HttpClient){}
+  constructor(public questionService: QuestionService, private router: Router,){}
 
   async fetchQuestion(){
       await this.questionService.postSymptom().then((res: any)=>{
@@ -72,8 +71,7 @@ export class QuestionsComponent implements OnInit{
   }
 
   async getReport(){
-    const reportUrl = await this.questionService.fetchReport()
-    this.url = reportUrl
+    this.router.navigate(['/report'])
   }
 
 

@@ -166,9 +166,8 @@ export class QuestionService {
   async fetchReport(): Promise<any> {
     const data = {data_id: this.quesArr[0].data_id};
     try {
-      const url = await this.http.post("http://192.168.97.194:5000/analyze",data).toPromise();
-      console.log("report url: ",url);
-      return (url);
+      const details = await this.http.post("http://192.168.97.194:5000/analyze",data).toPromise();
+      return (details);
     } catch (error: any) {
       throw new Error('Error fetching data: ' + error.message);
     }

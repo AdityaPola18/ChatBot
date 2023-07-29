@@ -1,4 +1,19 @@
-
+.bg {
+    background-color: rgb(34,38,84);
+    background-size: cover;
+    height: 100vh;
+}
+.logo {
+    height: 100px;
+    width: 250px;
+}
+@media screen and (max-width: 650px) {
+    .logo{
+        height: 80px;
+        width: 180px;
+        margin-bottom: 20px;
+    }
+}
 .chatCont{
     display: flex;
     flex-direction: column;
